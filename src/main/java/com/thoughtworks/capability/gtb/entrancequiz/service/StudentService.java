@@ -16,6 +16,10 @@ public class StudentService {
         return StudentListSingletonFactory.getInstance();
     }
 
+    public List<Team> getTeamList() {
+        return TeamListSingletonFactory.getInstance();
+    }
+
     public List<Team> groupStudents() {
         List<Student> studentList = this.getStudentList();
         List<Student> newStudentList = new ArrayList<Student>();
@@ -30,11 +34,10 @@ public class StudentService {
             }
         });
 
-        List<Team> teamList = new ArrayList<Team>(6);
-        for (int i=0; i<6; i++) {
-            teamList.add(new Team());
+        List<Team> teamList = this.getTeamList();
+        for(Team team: teamList) {
+            team.getStudentList().clear();
         }
-
         Collections.shuffle(newStudentList);
         for(int i = 0; i < newStudentList.size(); i++) {
             teamList.get(i%6).getStudentList().add(newStudentList.get(i));
@@ -45,5 +48,15 @@ public class StudentService {
     public void addStudent(String name) {
         List<Student> studentList = this.getStudentList();
         studentList.add(new Student(studentList.size()+1, name));
+    }
+
+    public void changeTeamName(int index, String newName) {
+        List<Team> teamList = this.getTeamList();
+        teamList.forEach((team -> {
+            if (team.getName().equals(newName)) {
+                throw new RuntimeException();
+            }
+        }));
+        teamList.get(index).setName(newName);
     }
 }
