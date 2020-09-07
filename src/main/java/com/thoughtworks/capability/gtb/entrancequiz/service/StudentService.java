@@ -8,6 +8,6 @@ import java.util.List;
 @Service
 public class StudentService {
     public List<Student> getStudentList() {
-        return null;
+        return StudentListSingletonFactory.getInstance();
     }
 }

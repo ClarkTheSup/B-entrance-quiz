@@ -11,7 +11,7 @@ public class StudentListSingletonFactory {
     private static List<Student> studentList = new ArrayList<Student>();
     private StudentListSingletonFactory() {}
 
-    public List<Student> getInstance() {
+    public static List<Student> getInstance() {
         return studentList;
     }
 
