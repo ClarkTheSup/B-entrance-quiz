@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class StudentService {
@@ -41,5 +40,10 @@ public class StudentService {
             teamList.get(i%6).getStudentList().add(newStudentList.get(i));
         }
         return teamList;
+    }
+
+    public void addStudent(String name) {
+        List<Student> studentList = this.getStudentList();
+        studentList.add(new Student(studentList.size()+1, name));
     }
 }

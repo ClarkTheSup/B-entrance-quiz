@@ -9,17 +9,14 @@ import com.thoughtworks.capability.gtb.entrancequiz.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-public class StudentApi {
+public class StudentControllerApi {
     @Autowired
     StudentService studentService;
 
@@ -36,5 +33,12 @@ public class StudentApi {
     public List<Team> getTeamList() throws Exception{
         List<Team> teamList = studentService.groupStudents();
         return teamList;
+    }
+
+    @PostMapping("/student/{name}")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addStudent(@PathVariable String name) {
+        studentService.addStudent(name);
     }
 }
