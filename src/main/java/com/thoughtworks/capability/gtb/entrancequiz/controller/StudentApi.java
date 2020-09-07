@@ -33,7 +33,7 @@ public class StudentApi {
     @GetMapping("/student/teams")
     @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
-    public List<Team> getTeamList() {
+    public List<Team> getTeamList() throws Exception{
         List<Team> teamList = studentService.groupStudents();
         return teamList;
     }
