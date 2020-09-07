@@ -3,6 +3,7 @@ package com.thoughtworks.capability.gtb.entrancequiz.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.capability.gtb.entrancequiz.domain.Student;
+import com.thoughtworks.capability.gtb.entrancequiz.domain.Team;
 import com.thoughtworks.capability.gtb.entrancequiz.service.StudentListSingletonFactory;
 import com.thoughtworks.capability.gtb.entrancequiz.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,13 @@ public class StudentApi {
     @ResponseStatus(HttpStatus.OK)
     public List<Student> getStudentList() {
         return StudentListSingletonFactory.getInstance();
+    }
+
+    @GetMapping("/student/teams")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.OK)
+    public List<Team> getTeamList() {
+        List<Team> teamList = studentService.groupStudents();
+        return teamList;
     }
 }
